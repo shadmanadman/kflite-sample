@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinCocoapods)
 }
 
 kotlin {
@@ -16,20 +17,32 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
+
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+
+    cocoapods {
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        version = "1.0"
+        ios.deploymentTarget = "16.0"
+        podfile = project.file("../iosApp/Podfile")
+        pod("TensorFlowLiteObjC", moduleName = "TFLTensorFlowLite")
+        framework {
             baseName = "ComposeApp"
             isStatic = true
+            linkerOpts(
+                project.file("../iosApp/Pods/TensorFlowLiteC/Frameworks").path.let { "-F$it" },
+                "-framework", "TensorFlowLiteC"
+            )
         }
     }
-    
+
     sourceSets {
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -43,7 +56,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation("io.github.shadmanadman:kflite:1.4.0-SNAPSHOT")
+            implementation("io.github.shadmanadman:kflite:1.5.0-SNAPSHOT")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
