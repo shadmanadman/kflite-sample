@@ -56,7 +56,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation("io.github.shadmanadman:kflite:1.5.0-SNAPSHOT")
+            implementation("io.github.shadmanadman:kflite:1.42.0-SNAPSHOT")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
