@@ -31,12 +31,18 @@ kotlin {
         ios.deploymentTarget = "16.0"
         podfile = project.file("../iosApp/Podfile")
         pod("TensorFlowLiteObjC", moduleName = "TFLTensorFlowLite")
+        pod("TensorFlowLiteObjC/Metal") {
+            linkOnly = true
+        }
+        pod("TensorFlowLiteObjC/CoreML") {
+            linkOnly = true
+        }
         framework {
             baseName = "ComposeApp"
             isStatic = true
             linkerOpts(
-                project.file("../iosApp/Pods/TensorFlowLiteC/Frameworks").path.let { "-F$it" },
-                "-framework", "TensorFlowLiteC"
+                project.file("../iosApp/Pods/TensorFlowLiteObjC/Frameworks").path.let { "-F$it" },
+                "-framework", "TensorFlowLiteObjC"
             )
         }
     }
@@ -56,7 +62,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation("io.github.shadmanadman:kflite:1.42.0-SNAPSHOT")
+            implementation("io.github.shadmanadman:kflite:1.53.0-SNAPSHOT")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
