@@ -16,8 +16,6 @@ fun RunModelWithImageSample() {
     val scope = rememberCoroutineScope()
     val inputImage = imageResource(Res.drawable.example_model_input)
     scope.launch {
-        // init model
-        // - options is not mandatory. Set values carefully, Make sure your model supports each one.
         Kflite.init(
             model = Res.readBytes("files/efficientdet-lite2.tflite"),
             options = InterpreterOptions(
@@ -40,6 +38,8 @@ fun RunModelWithImageSample() {
         val firstOutputShape = Kflite.getOutputTensor(0).shape[0]
         val secondOutputShape = Kflite.getOutputTensor(0).shape[1]
         val thirdOutputShape = Kflite.getOutputTensor(0).shape[2]
+
+        println("firstOutputTensor: ${firstOutputShape}, secondOutputTensorShape: $secondOutputShape, ThirdOutputTensorShape: $thirdOutputShape")
 
         val modelOutputSize = Array(firstOutputShape) {
             Array(secondOutputShape) {

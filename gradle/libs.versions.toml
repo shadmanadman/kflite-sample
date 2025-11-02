@@ -12,9 +12,11 @@ androidx-lifecycle = "2.9.0"
 androidx-testExt = "1.2.1"
 composeMultiplatform = "1.8.1"
 junit = "4.13.2"
+kflite = "1.53.0-SNAPSHOT"
 kotlin = "2.1.21"
 
 [libraries]
+kflite = { module = "io.github.shadmanadman:kflite", version.ref = "kflite" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { module = "junit:junit", version.ref = "junit" }
