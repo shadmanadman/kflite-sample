@@ -16,7 +16,7 @@ kflite = "1.53.0-SNAPSHOT"
 kotlin = "2.1.21"
 
 [libraries]
-kflite = { module = "io.github.shadmanadman:kflite", version.ref = "kflite" }
+kflite = { module = "io.github.shadadman:kflite", version.ref = "kflite" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { module = "junit:junit", version.ref = "junit" }
